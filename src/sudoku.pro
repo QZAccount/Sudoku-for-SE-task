@@ -6,6 +6,7 @@
 
 QT	   += core gui
 QMAKE_CXXFLAGS += -std=c++11
+RC_ICONS = ./sudoku.ico
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

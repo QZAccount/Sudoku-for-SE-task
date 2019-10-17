@@ -20,7 +20,7 @@ void MainWindow::init_menu()
 	QActionGroup *level_group = new QActionGroup(this);
 	for(int i = SUDOKU_LEVEL_MIN; i <= SUDOKU_LEVEL_MAX; ++i)
 	{
-		QAction *level_action = new QAction("Level " + QString::number(i));
+        QAction *level_action = new QAction("难度 " + QString::number(i));
 		level_action->setCheckable(true);
 		if(i == SUDOKU_LEVEL_MIN)
 			level_action->setChecked(true);
@@ -32,7 +32,7 @@ void MainWindow::init_menu()
 		ui->level_menu->addAction(level_action);
 	}
 
-	QAction *level_empty = new QAction("Level Empty");
+    QAction *level_empty = new QAction("空白");
 	m_level->setMapping(level_empty, 0);
 	connect(level_empty, SIGNAL(triggered()), m_level, SLOT(map()));
 	level_group->addAction(level_empty);
@@ -43,8 +43,9 @@ void MainWindow::init_menu()
 	QSignalMapper *m_csize = new QSignalMapper(this);
 	QActionGroup *csize_group = new QActionGroup(this);
 	for(int i = 3; i <= 4; ++i)
-	{
-		QAction *csize_action = new QAction(QString::number(i));
+    {
+        //		QAction *csize_action = new QAction(QString::number(i));
+        QAction *csize_action = new QAction(QString::number(i * i) + "×" + QString::number(i * i));
 		csize_action->setCheckable(true);
 		if(i == 3)
 			csize_action->setChecked(true);
@@ -134,38 +135,38 @@ void MainWindow::init_widgets(int cell_size)
 
 	start_btn = new ToolButton;
 	start_btn->set_image(":/icons/icons/new.png");
-	start_btn->setToolTip("New Game");
+    start_btn->setToolTip("新游戏");
 	connect(start_btn, SIGNAL(clicked()), this, SLOT(game_start()));
 
 	reset_btn = new ToolButton;
 	reset_btn->set_image(":/icons/icons/restart.png");
-	reset_btn->setToolTip("Restart");
+    reset_btn->setToolTip("重新开始");
 	connect(reset_btn, SIGNAL(clicked()), this, SLOT(game_reset()));
 
 	pause_btn = new ToolButton;
 	pause_btn->set_image(":/icons/icons/pause.png");
-	pause_btn->setToolTip("Pause");
+    pause_btn->setToolTip("暂停");
 	connect(pause_btn, SIGNAL(clicked()), this, SLOT(toggle_button()));
 
 	hint_btn = new ToolButton;
 	hint_btn->set_image(":/icons/icons/information.png");
-	hint_btn->setToolTip("Hint");
+    hint_btn->setToolTip("提示");
 	connect(hint_btn, SIGNAL(clicked()), grid, SLOT(game_hint()));
 
 	clear_btn = new ToolButton;
 	clear_btn->set_image(":/icons/icons/eraser.png");
-	clear_btn->setToolTip("Clear Cell");
+    clear_btn->setToolTip("清除当前单元");
 	connect(clear_btn, SIGNAL(clicked()), grid, SLOT(clear_grid()));
 
 	backward_btn = new ToolButton;
 	backward_btn->set_image(":/icons/icons/back.png");
-	backward_btn->setToolTip("Undo");
+    backward_btn->setToolTip("后退");
 	connect(backward_btn, SIGNAL(clicked()), grid, SLOT(backward_step()));
 	connect(grid, SIGNAL(set_backward_enable(bool)), this, SLOT(set_backward_enable(bool)));
 
 	forward_btn = new ToolButton;
 	forward_btn->set_image(":/icons/icons/next.png");
-	forward_btn->setToolTip("Rndo");
+    forward_btn->setToolTip("重做");
 	connect(forward_btn, SIGNAL(clicked()), grid, SLOT(forward_step()));
 	connect(grid, SIGNAL(set_forward_enable(bool)), this, SLOT(set_forward_enable(bool)));
 
@@ -224,10 +225,10 @@ void MainWindow::toggle_button()
 	{
 		grid->free_selection();
 		pause_btn->set_image(":/icons/icons/play.png");
-		pause_btn->setToolTip("Continue");
+        pause_btn->setToolTip("继续");
 	} else {
 		pause_btn->set_image(":/icons/icons/pause.png");
-		pause_btn->setToolTip("Pause");
+        pause_btn->setToolTip("暂停");
 	}
 }
 
@@ -260,7 +261,7 @@ void MainWindow::game_reset()
 void MainWindow::level_changed(int level)
 {
 	grid->level_changed(level);
-	level_label->setText("Level " + QString::number(level));
+    level_label->setText("难度 " + QString::number(level));
 	game_start();
 }
 
@@ -299,7 +300,7 @@ void MainWindow::game_over()
 	for(DigitButton *digit_btn : digit_btns)
 		digit_btn->set_checked(false);
 	set_tool_enable(false);
-	QMessageBox::information(this, "Problem Solved", "Congratulations! You solved this puzzle in " + timer->get_time() + ".");
+    QMessageBox::information(this, "通关啦！", "恭喜，你的最终成绩为：" + timer->get_time());
 }
 
 void MainWindow::set_tool_enable(bool is_enabled)

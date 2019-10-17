@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Sudoku Game</string>
+   <string>数独游戏</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icons/ksudoku_103845.ico</normaloff>icons/ksudoku_103845.ico</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -23,21 +27,21 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>20</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="level_menu">
     <property name="title">
-     <string>Level</string>
+     <string>难度</string>
     </property>
    </widget>
    <widget class="QMenu" name="menuGam">
     <property name="title">
-     <string>Game</string>
+     <string>游戏</string>
     </property>
     <widget class="QMenu" name="grid_size_menu">
      <property name="title">
-      <string>Grid Size</string>
+      <string>游戏类型</string>
      </property>
     </widget>
     <addaction name="actionNew_Game"/>
@@ -51,22 +55,22 @@
   </widget>
   <action name="actionNew_Game">
    <property name="text">
-    <string>New Game</string>
+    <string>新游戏</string>
    </property>
   </action>
   <action name="actionHint_one">
    <property name="text">
-    <string>Hint One</string>
+    <string>提示</string>
    </property>
   </action>
   <action name="actionHint_All">
    <property name="text">
-    <string>Solve</string>
+    <string>显示答案</string>
    </property>
   </action>
   <action name="actionRestart_Game">
    <property name="text">
-    <string>Restart Game</string>
+    <string>重新开始</string>
    </property>
   </action>
  </widget>
